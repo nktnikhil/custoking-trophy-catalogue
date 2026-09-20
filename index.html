@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Custoking Trophy Catalogue — Browse trophy models, sizes and prices."
+    >
+
+    <meta name="theme-color" content="#081321">
+
+    <title>Custoking | Trophy Catalogue</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="nav-wrap">
+
+        <a href="#" class="brand">
+
+         <img
+        src="images/logo.png"
+        alt="Custoking"
+        class="brand-logo"
+    >
+
+            <span class="brand-text">
+                <strong>CUSTOKING</strong>
+                <small>TROPHY COLLECTION</small>
+            </span>
+
+        </a>
+
+        <a
+            href="https://wa.me/917478004111"
+            target="_blank"
+            rel="noopener"
+            class="nav-wa"
+        >
+            WhatsApp Us
+        </a>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-inner">
+
+            <div class="eyebrow">
+                CUSTOKING • AWARDS & RECOGNITION
+            </div>
+
+            <h1>
+                Celebrate Every
+                <span>Achievement.</span>
+            </h1>
+
+            <p>
+                Explore our trophy collection with model-wise sizes
+                and prices. Select a size and enquire directly on WhatsApp.
+            </p>
+
+            <div class="hero-search">
+
+                <span>⌕</span>
+
+                <input
+                    id="searchInput"
+                    type="search"
+                    placeholder="Search trophy model..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="hero-stat">
+
+                <strong id="totalModels">—</strong>
+                models available
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATALOGUE -->
+
+    <section class="catalogue">
+
+        <div class="section-head">
+
+            <div>
+
+                <div class="eyebrow dark">
+                    TROPHY CATALOGUE
+                </div>
+
+                <h2>
+                    Find your trophy
+                </h2>
+
+            </div>
+
+            <div class="result-count">
+
+                <span id="resultCount">0</span>
+                models
+
+            </div>
+
+        </div>
+
+
+        <!-- FILTERS -->
+
+        <div class="filter-panel">
+
+            <div class="filter-field search-field">
+
+                <label for="searchInput2">
+                    Search Model
+                </label>
+
+                <input
+                    id="searchInput2"
+                    type="text"
+                    placeholder="e.g. 9001, A-25, WM001"
+                >
+
+            </div>
+
+
+            <div class="filter-field">
+
+                <label for="typeFilter">
+                    Type
+                </label>
+
+                <select id="typeFilter">
+
+                    <option value="all">
+                        All Types
+                    </option>
+
+                    <option value="Trophy">
+                        Trophy
+                    </option>
+
+                    <option value="Economic Trophy">
+                        Economic Trophy
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-field">
+
+                <label for="minPrice">
+                    Min Starting Price
+                </label>
+
+                <input
+                    id="minPrice"
+                    type="number"
+                    min="0"
+                    placeholder="₹ Min"
+                >
+
+            </div>
+
+
+            <div class="filter-field">
+
+                <label for="maxPrice">
+                    Max Starting Price
+                </label>
+
+                <input
+                    id="maxPrice"
+                    type="number"
+                    min="0"
+                    placeholder="₹ Max"
+                >
+
+            </div>
+
+
+            <div class="filter-field sort-field">
+
+                <label for="sortSelect">
+                    Sort
+                </label>
+
+                <select id="sortSelect">
+
+                    <option value="price-low">
+                        Starting Price: Low to High
+                    </option>
+
+                    <option value="price-high">
+                        Starting Price: High to Low
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                id="resetButton"
+                class="reset-btn"
+                type="button"
+            >
+                Reset
+            </button>
+
+        </div>
+
+
+        <!-- STATES -->
+
+        <div id="loadingState" class="state">
+            Loading catalogue…
+        </div>
+
+
+        <div
+            id="errorState"
+            class="state error hidden"
+        >
+            Unable to load the catalogue.
+
+            <br>
+
+            Please make sure:
+
+            <b>data/trophy_prices.json</b>
+
+            exists.
+        </div>
+
+
+        <div
+            id="emptyState"
+            class="state empty hidden"
+        >
+
+            <div class="empty-icon">
+                ⌕
+            </div>
+
+            <h3>
+                No trophies found
+            </h3>
+
+            <p>
+                Try changing your search or filters.
+            </p>
+
+            <button
+                id="emptyResetButton"
+                class="outline-btn"
+                type="button"
+            >
+                Clear Filters
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCTS -->
+
+        <div
+            id="productGrid"
+            class="product-grid"
+        ></div>
+
+    </section>
+
+
+    <!-- BULK ORDER CTA -->
+
+    <section class="bulk-cta">
+
+        <div>
+
+            <div class="eyebrow">
+                BULK ORDERS
+            </div>
+
+            <h2>
+                Need trophies for your school or event?
+            </h2>
+
+            <p>
+                Share your requirement with Custoking and
+                we'll help you with models, quantities and pricing.
+            </p>
+
+        </div>
+
+
+        <a
+            class="cta-wa"
+            href="https://wa.me/917478004111?text=Hello%20Custoking%2C%20I%20need%20trophies%20for%20a%20bulk%20order."
+            target="_blank"
+            rel="noopener"
+        >
+            Enquire on WhatsApp →
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div class="brand footer-brand">
+
+        <a href="#" class="brand">
+
+         <img
+        src="images/logo.png"
+        alt="Custoking"
+        class="brand-logo"
+    >
+
+            <span class="brand-text">
+
+                <strong>
+                    CUSTOKING
+                </strong>
+
+                <small>
+                    TROPHY COLLECTION
+                </small>
+
+            </span>
+
+        </div>
+
+
+        <div>
+            © <span id="year"></span>
+            Custoking. All rights reserved.
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- FLOATING WHATSAPP -->
+
+<a
+    class="floating-wa"
+    href="https://wa.me/917478004111"
+    target="_blank"
+    rel="noopener"
+    aria-label="WhatsApp Custoking"
+>
+    ☏
+</a>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
